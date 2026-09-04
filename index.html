@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>진로 나침반 | 우리 반 진로진학 자료실</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F5F2EA;
+    --paper: #FBF9F4;
+    --ink: #1B2A41;
+    --ink-soft: #4A5568;
+    --gold: #B98430;
+    --gold-deep: #8C6522;
+    --steel: #3D5A75;
+    --steel-bg: #E4EAF0;
+    --sage: #5B7A6F;
+    --sage-bg: #E5EDE9;
+    --plum: #8B5E83;
+    --plum-bg: #F0E5EE;
+    --line: rgba(27,42,65,0.12);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    line-height: 1.6;
+    padding-bottom: 4rem;
+  }
+  h1,h2,h3{ font-family: 'Noto Serif KR', serif; font-weight: 600; }
+
+  /* 헤더 */
+  header{
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 3.5rem 1.5rem 2.5rem;
+    text-align: left;
+  }
+  .eyebrow-line{
+    display:flex; align-items:center; gap:10px;
+    color: var(--gold-deep);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+  .eyebrow-line svg{ width:20px; height:20px; flex-shrink:0; }
+  header h1{
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    line-height: 1.35;
+    max-width: 14ch;
+  }
+  header p{
+    margin-top: 1rem;
+    color: var(--ink-soft);
+    max-width: 60ch;
+    font-size: 1.05rem;
+  }
+
+  /* 카테고리 필터 */
+  .filter-bar{
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display:flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  .filter-btn{
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink-soft);
+    padding: 0.5rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: inherit;
+  }
+  .filter-btn:hover{ border-color: var(--ink); color: var(--ink); }
+  .filter-btn.active{
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+
+  /* 카드 그리드 */
+  main{
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.1rem;
+  }
+  .card{
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 1.4rem;
+    display:flex;
+    flex-direction:column;
+    gap: 0.7rem;
+    transition: border-color 0.15s ease;
+  }
+  .card:hover{ border-color: var(--ink); }
+  .tag{
+    display:inline-flex;
+    align-self:flex-start;
+    font-size: 0.78rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  .tag.steel{ background:var(--steel-bg); color:var(--steel); }
+  .tag.sage{ background:var(--sage-bg); color:var(--sage); }
+  .tag.plum{ background:var(--plum-bg); color:var(--plum); }
+  .tag.gold{ background:#F3E7D2; color:var(--gold-deep); }
+  .card h3{ font-size: 1.15rem; }
+  .card p{ color: var(--ink-soft); font-size: 0.92rem; flex-grow:1; }
+  .card a{
+    color: var(--ink);
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    display:flex;
+    align-items:center;
+    gap: 5px;
+  }
+  .card a:hover{ color: var(--gold-deep); }
+  .card a svg{ width:15px; height:15px; }
+
+  /* 안내 섹션 */
+  .notice{
+    max-width: 960px;
+    margin: 3rem auto 0;
+    padding: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .notice h2{ font-size: 1.2rem; margin-bottom: 0.6rem; }
+  .notice p{ color: var(--ink-soft); font-size: 0.92rem; }
+  .notice-list{ margin-top: 0.8rem; padding-left: 1.2rem; color: var(--ink-soft); font-size: 0.92rem; }
+  .notice-list li{ margin-bottom: 0.3rem; }
+
+  footer{
+    max-width: 960px;
+    margin: 2.5rem auto 0;
+    padding: 0 1.5rem;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow-line">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2" /><path d="M15 9l-3.5 6-2.5-2.5L15 9z" fill="currentColor" stroke="none"/></svg>
+    <span>학급 진로진학부</span>
+  </div>
+  <h1>내 진로를 찾아가는 나침반</h1>
+  <p>학과·자격증·진로검사·진학상담까지, 우리 반 진로진학부가 모은 자료들을 한곳에서 확인하세요.</p>
+</header>
+
+<div class="filter-bar" id="filterBar">
+  <button class="filter-btn active" data-filter="all">전체</button>
+  <button class="filter-btn" data-filter="major">학과·전공</button>
+  <button class="filter-btn" data-filter="license">자격증·시험</button>
+  <button class="filter-btn" data-filter="test">진로심리검사</button>
+  <button class="filter-btn" data-filter="counsel">진학상담</button>
+</div>
+
+<main>
+  <div class="grid" id="cardGrid">
+
+    <div class="card" data-cat="major">
+      <span class="tag steel">학과·전공</span>
+      <h3>메이저맵 학과 탐색</h3>
+      <p>전국 대학 학과별 커리큘럼, 졸업 후 진로, 관련 자격증 정보를 한눈에 비교할 수 있어요.</p>
+      <a href="#" target="_blank">바로가기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+    </div>
+
+    <div class="card" data-cat="major">
+      <span class="tag steel">학과·전공</span>
+      <h3>대학알리미 학과 정보</h3>
+      <p>대학별 학과 개설 현황, 취업률, 등록금 등 공식 공시 자료를 확인할 수 있는 사이트예요.</p>
+      <a href="#" target="_blank">바로가기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+    </div>
+
+    <div class="card" data-cat="test">
+      <span class="tag plum">진로심리검사</span>
+      <h3>커리어넷 진로심리검사</h3>
+      <p>직업 흥미도, 적성, 가치관 검사를 무료로 진행하고 결과를 바탕으로 추천 직업을 받아볼 수 있어요.</p>
+      <a href="#" target="_blank">바로가기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+    </div>
+
+    <div class="card" data-cat="test">
+      <span class="tag plum">진로심리검사</span>
+      <h3>워크넷 직업선호도검사</h3>
+      <p>고용노동부에서 제공하는 표준화된 직업 적성 및 선호도 검사로 진로 방향을 점검해보세요.</p>
+      <a href="#" target="_blank">바로가기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+    </div>
+
+    <div class="card" data-cat="license">
+      <span class="tag sage">자격증·시험</span>
+      <h3>큐넷 국가자격시험 안내</h3>
+      <p>희망 진로와 관련된 국가기술·전문 자격증의 시험 일정과 응시 자격을 확인할 수 있어요.</p>
+      <a href="#" target="_blank">바로가기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+    </div>
+
+    <div class="card" data-cat="license">
+      <span class="tag sage">자격증·시험</span>
+      <h3>학과별 추천 자격증 목록</h3>
+      <p>진로진학부가 정리한, 학과별로 미리 준비하면 좋은 자격증과 시험 목록이에요.</p>
+      <a href="#" target="_blank">바로가기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+    </div>
+
+    <div class="card" data-cat="counsel">
+      <span class="tag gold">진학상담</span>
+      <h3>진로진학부 상담 신청</h3>
+      <p>학과 선택, 자기소개서, 면접 준비 등 궁금한 점을 진로진학부 담당 학생에게 신청해보세요.</p>
+      <a href="#" target="_blank">바로가기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+    </div>
+
+    <div class="card" data-cat="counsel">
+      <span class="tag gold">진학상담</span>
+      <h3>어디가 (대입정보포털)</h3>
+      <p>대학별 입시 전형, 학과별 경쟁률과 합격 컷 등 실제 입시 데이터를 살펴볼 수 있어요.</p>
+      <a href="#" target="_blank">바로가기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
+    </div>
+
+  </div>
+
+  <div class="notice">
+    <h2>이용 안내</h2>
+    <p>자료는 진로진학부가 주기적으로 새 정보로 업데이트해요.</p>
+    <ul class="notice-list">
+      <li>링크가 작동하지 않으면 진로진학부에게 알려주세요.</li>
+      <li>추가하고 싶은 자료가 있다면 언제든 건의해주세요.</li>
+    </ul>
+  </div>
+</main>
+
+<footer>
+  담당: 학급 진로진학부 · 문의는 학급 단체 채팅방으로 남겨주세요.
+</footer>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.card');
+
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      buttons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const filter = btn.dataset.filter;
+
+      cards.forEach(card => {
+        if(filter === 'all' || card.dataset.cat === filter){
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
