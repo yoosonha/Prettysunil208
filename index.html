@@ -222,6 +222,7 @@
   }
   .official:hover{ background: #2c4160; }
   .official svg{ width:17px; height:17px; }
+  .official + .official{ margin-top: 0.6rem; }
   .official.off{
     background: transparent;
     border: 1px dashed var(--ink-soft);
@@ -293,9 +294,15 @@
    when    : "이런 때 쓰면 좋아요" 목록
    steps   : "이용 방법" 목록 (순서대로 1, 2, 3)
    tips    : "진로진학부 꿀팁" 목록
-   url     : 공식 사이트 주소 (따옴표 안에 붙여넣기, 비워두면 "준비 중"으로 보여요)
-   btn     : (선택) 버튼에 쓸 글자
-   soon    : (선택) url이 비어 있을 때 보여줄 문구
+   url     : 공식 사이트 주소 하나 (따옴표 안에 붙여넣기, 비워두면 "준비 중"으로 보여요)
+   links   : (선택) 링크를 여러 개 넣을 때. 아래처럼 쓰면 버튼이 개수만큼 나와요.
+             links이 있으면 url은 무시돼요.
+             links: [
+               { name: '사이트 이름', url: 'https://주소' },
+               { name: '다른 사이트', url: 'https://주소' }
+             ],
+   btn     : (선택) url 버튼에 쓸 글자
+   soon    : (선택) 링크가 비어 있을 때 보여줄 문구
    ===================================================================== */
 const SITES = [
   {
@@ -321,8 +328,10 @@ const SITES = [
       '결과는 캡처해두면 상담 때 바로 보여줄 수 있어요.',
       '마음에 안 드는 결과가 나와도 참고만 하면 돼요.'
     ],
-    url: ''
-  },
+    links: [
+       { name: '커리어넷', url: 'https://www.career.go.kr/cloud/w/main/home' },
+       { name: '대학백과', url: 'https://www.univ100.kr/' }
+  ],
   {
     id: 'univ',
     cat: 'major',
@@ -522,9 +531,12 @@ function renderCards(){
 
 function renderDetail(s){
   const list = arr => arr.map(x => `<li>${x}</li>`).join('');
-  const official = s.url
-    ? `<a class="official" href="${s.url}" target="_blank" rel="noopener">${s.btn || '공식 사이트 바로가기'} ${ARROW}</a>
-       <p class="note">새 탭에서 열려요</p>`
+  const links = (s.links && s.links.length)
+    ? s.links.filter(l => l && l.url)
+    : (s.url ? [{ name: s.btn || '공식 사이트 바로가기', url: s.url }] : []);
+  const official = links.length
+    ? links.map(l => `<a class="official" href="${l.url}" target="_blank" rel="noopener">${l.name || '바로가기'} ${ARROW}</a>`).join('')
+      + `<p class="note">새 탭에서 열려요</p>`
     : `<div class="official off">${s.soon || '공식 사이트 링크는 곧 추가될 예정이에요.'}</div>`;
   detailBody.innerHTML = `
     <a class="back-btn" href="#/">${BACK} 목록으로</a>
