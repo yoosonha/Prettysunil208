@@ -32,6 +32,7 @@
     padding-bottom: 4rem;
   }
   h1,h2,h3{ font-family: 'Noto Serif KR', serif; font-weight: 600; }
+  .hidden{ display:none !important; }
 
   /* 헤더 */
   header{
@@ -107,6 +108,7 @@
     flex-direction:column;
     gap: 0.7rem;
     transition: border-color 0.15s ease;
+    cursor: pointer;
   }
   .card:hover{ border-color: var(--ink); }
   .tag{
@@ -154,9 +156,86 @@
     color: var(--ink-soft);
     font-size: 0.85rem;
   }
+
+  /* ===== 상세 페이지 ===== */
+  .detail-wrap{
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 0;
+  }
+  .back-btn{
+    display:inline-flex; align-items:center; gap:6px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    color: var(--ink);
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+  .back-btn:hover{ border-color: var(--ink); }
+  .back-btn svg{ width:16px; height:16px; }
+  .detail-head{ margin: 1.8rem 0 1.5rem; }
+  .detail-head h1{
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
+    line-height: 1.35;
+    margin: 0.8rem 0;
+  }
+  .detail-head .lead{ color: var(--ink-soft); font-size: 1.05rem; }
+  .section{
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 1.4rem 1.5rem;
+    margin-bottom: 1rem;
+  }
+  .section h2{ font-size: 1.1rem; margin-bottom: 0.8rem; }
+  .section ul{ padding-left: 1.2rem; }
+  .section li{ margin-bottom: 0.35rem; font-size: 0.97rem; }
+  .steps{ list-style: none; padding-left: 0 !important; counter-reset: s; }
+  .steps li{
+    counter-increment: s;
+    display:flex; gap: 0.8rem; align-items:flex-start;
+    margin-bottom: 0.7rem;
+  }
+  .steps li::before{
+    content: counter(s);
+    flex-shrink:0;
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 0.82rem;
+    display:flex; align-items:center; justify-content:center;
+    margin-top: 1px;
+  }
+  .official{
+    display:flex; align-items:center; justify-content:center; gap:8px;
+    margin-top: 1.5rem;
+    background: var(--ink);
+    color: var(--bg);
+    text-decoration: none;
+    padding: 0.95rem 1.2rem;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  .official:hover{ background: #2c4160; }
+  .official svg{ width:17px; height:17px; }
+  .official.off{
+    background: transparent;
+    border: 1px dashed var(--ink-soft);
+    color: var(--ink-soft);
+    font-weight: 500;
+    font-size: 0.92rem;
+  }
+  .note{ margin-top: 0.7rem; text-align:center; color: var(--ink-soft); font-size: 0.82rem; }
 </style>
 </head>
 <body>
+
+<!-- ===== 메인 페이지 ===== -->
+<div id="homeView">
 
 <header>
   <div class="eyebrow-line">
@@ -176,65 +255,7 @@
 </div>
 
 <main>
-  <div class="grid" id="cardGrid">
-
-    <div class="card" data-cat="major">
-      <span class="tag steel">학과·전공</span>
-      <h3>진로 탐색</h3>
-      <p>나의 흥미와 관심 분야를 알아보고 다양한 직업을 탐색하는 사이트</p>
-      <a href="#" target="_blank">바로가기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-    </div>
-
-    <div class="card" data-cat="major">
-      <span class="tag steel">학과·전공</span>
-      <h3>대학 학과 탐색</h3>
-      <p>대학과 학과의 특징, 교육 환경 및 공식 정보를 비교하는 사이트</p>
-      <a href="#" target="_blank">바로가기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-    </div>
-
-    <div class="card" data-cat="major">
-      <span class="tag plum">학과·전공</span>
-      <h3>입시 정보 분석</h3>
-      <p>대학별 입결과 전형 정보를 비교하고 입시 흐름을 파악하는 사이트</p>
-      <a href="#" target="_blank">바로가기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-    </div>
-
-    <div class="card" data-cat="test">
-      <span class="tag plum">성적</span>
-      <h3>5등급제 변환기</h3>
-      <p>내신 평균을 계산하고 5등급제와 기존 9등급제를 비교하는 도구</p>
-      <a href="#" target="_blank">바로가기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-    </div>
-
-    <div class="card" data-cat="major">
-      <span class="tag sage">학과·전공</span>
-      <h3>대입 제도 진학 준비</h3>
-      <p>대입 제도 변화와 교육청의 진학 자료를 확인하는 곳</p>
-      <a href="#" target="_blank">바로가기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-    </div>
-    
-    <div class="card" data-cat="test">
-      <span class="tag sage">성적</span>
-      <h3>내 성적으로 대학 찾기</h3>
-      <p>내 성적과 대학별 입시 결과를 비교해 지원을 고려할 대학을 탐색하는 서비스</p>
-      <a href="#" target="_blank">바로가기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-    </div>
-    
-    <div class="card" data-cat="license">
-      <span class="tag sage">자격증·시험</span>
-      <h3>큐넷 국가자격시험 안내</h3>
-      <p>희망 진로와 관련된 국가기술,전문 자격증의 시험 일정과 응시 자격을 확인하는 곳</p>
-      <a href="#" target="_blank">바로가기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-    </div>
-
-    <div class="card" data-cat="counsel">
-      <span class="tag gold">진학상담</span>
-      <h3>담임 선생님 상담 신청</h3>
-      <p>학과 선택, 자기소개서, 면접 준비 등 궁금한 점을 208 담임 선생님께 신청하기</p>
-      <a href="#" target="_blank">바로가기 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></a>
-    </div>
-
-  </div>
+  <div class="grid" id="cardGrid"></div>
 
   <div class="notice">
     <h2>이용 안내</h2>
@@ -250,25 +271,307 @@
   담당: 학급 진로진학부 · 문의는 학급 단체 채팅방으로 남겨주세요.
 </footer>
 
+</div>
+
+<!-- ===== 상세 페이지 ===== -->
+<div id="detailView" class="hidden">
+  <div class="detail-wrap" id="detailBody"></div>
+</div>
+
 <script>
-  const buttons = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.card');
+/* =====================================================================
+   ★ 자료 내용은 아래 SITES 목록만 고치면 돼요 ★
+   자료 하나 = { ... }, 한 덩어리 (중괄호 { 부터 }, 까지)
 
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      buttons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.dataset.filter;
+   id      : 영어로 된 이름표 (다른 자료와 겹치면 안 돼요)
+   cat     : 필터 분류 → major / license / test / counsel
+   tag     : 카드 위 작은 라벨에 쓰일 글자
+   color   : 라벨 색 → steel(파랑) / sage(초록) / plum(보라) / gold(노랑)
+   title   : 카드 제목
+   summary : 카드 안 짧은 설명
+   lead    : 상세 페이지 맨 위 소개 문장
+   when    : "이런 때 쓰면 좋아요" 목록
+   steps   : "이용 방법" 목록 (순서대로 1, 2, 3)
+   tips    : "진로진학부 꿀팁" 목록
+   url     : 공식 사이트 주소 (따옴표 안에 붙여넣기, 비워두면 "준비 중"으로 보여요)
+   btn     : (선택) 버튼에 쓸 글자
+   soon    : (선택) url이 비어 있을 때 보여줄 문구
+   ===================================================================== */
+const SITES = [
+  {
+    id: 'explore',
+    cat: 'major',
+    tag: '학과·전공',
+    color: 'steel',
+    title: '진로 탐색',
+    summary: '나의 흥미와 관심 분야를 알아보고 다양한 직업을 탐색하는 사이트',
+    lead: '내가 뭘 좋아하고 잘하는지부터 알아보고, 어울리는 직업을 찾아볼 수 있는 사이트예요.',
+    when: [
+      '하고 싶은 일이 아직 없을 때',
+      '관심 분야를 직업으로 이어서 생각해보고 싶을 때',
+      '진로 상담이나 진로 활동 전에 나를 정리하고 싶을 때'
+    ],
+    steps: [
+      '사이트에 접속해서 흥미·적성 같은 검사 메뉴를 찾아요.',
+      '문항에 솔직하게 답해요.',
+      '결과에 나온 직업을 하나씩 열어서 하는 일과 필요한 준비를 읽어요.'
+    ],
+    tips: [
+      '정답이 없는 검사라서, "이래야 하는데"보다 "나는 어떤지"로 답해요.',
+      '결과는 캡처해두면 상담 때 바로 보여줄 수 있어요.',
+      '마음에 안 드는 결과가 나와도 참고만 하면 돼요.'
+    ],
+    url: ''
+  },
+  {
+    id: 'univ',
+    cat: 'major',
+    tag: '학과·전공',
+    color: 'steel',
+    title: '대학 학과 탐색',
+    summary: '대학과 학과의 특징, 교육 환경 및 공식 정보를 비교하는 사이트',
+    lead: '대학과 학과가 어떤 곳인지, 공식 자료로 나란히 비교해볼 수 있는 사이트예요.',
+    when: [
+      '희망 학과가 어느 대학에 있는지 찾을 때',
+      '같은 학과를 여러 대학끼리 비교하고 싶을 때',
+      '학교 홍보 글 말고 공식 정보를 보고 싶을 때'
+    ],
+    steps: [
+      '관심 있는 학과나 대학 이름을 검색해요.',
+      '배우는 과목, 졸업 후 진로, 교육 환경 항목을 확인해요.',
+      '후보 대학 2~3곳을 같은 항목으로 비교해요.'
+    ],
+    tips: [
+      '학과 이름이 같아도 대학마다 배우는 내용이 달라요. 희망 대학 홈페이지에서 교육과정을 한 번 더 확인해요.',
+      '비교할 때는 같은 기준의 항목끼리만 봐요.'
+    ],
+    url: ''
+  },
+  {
+    id: 'admission',
+    cat: 'major',
+    tag: '학과·전공',
+    color: 'plum',
+    title: '입시 정보 분석',
+    summary: '대학별 입결과 전형 정보를 비교하고 입시 흐름을 파악하는 사이트',
+    lead: '대학별 지난 입시 결과와 전형 방법을 비교하면서 입시 흐름을 읽어볼 수 있는 사이트예요.',
+    when: [
+      '지원하려는 대학의 전형 방법이 궁금할 때',
+      '지난해 입시 결과가 궁금할 때',
+      '어떤 전형이 나에게 맞을지 고민될 때'
+    ],
+    steps: [
+      '희망 대학이나 학과를 검색해요.',
+      '전형별 모집 방법과 지난 입시 결과를 확인해요.',
+      '비교해서 나만의 후보 목록을 만들어요.'
+    ],
+    tips: [
+      '입시 결과는 참고용이에요. 합격 여부를 알려주지는 않아요.',
+      '지원하는 해의 모집요강은 꼭 대학 홈페이지에서 다시 확인해요.',
+      '한 해 결과만 보지 말고 여러 해의 흐름을 같이 봐요.'
+    ],
+    url: ''
+  },
+  {
+    id: 'grade5',
+    cat: 'test',
+    tag: '성적',
+    color: 'plum',
+    title: '5등급제 변환기',
+    summary: '내신 평균을 계산하고 5등급제와 기존 9등급제를 비교하는 도구',
+    lead: '내신 평균을 계산해서 5등급제와 기존 9등급제 결과를 나란히 비교해볼 수 있는 도구예요.',
+    when: [
+      '내 내신이 두 방식에서 어떻게 달라지는지 궁금할 때',
+      '지원 가능한 대학 범위를 대략 가늠해보고 싶을 때',
+      '성적 계획을 세울 때'
+    ],
+    steps: [
+      '도구를 열어요.',
+      '과목별 점수나 등급을 입력해요.',
+      '계산된 평균과 두 방식의 결과를 비교해요.'
+    ],
+    tips: [
+      '어느 방식이 적용되는지는 입학 연도에 따라 달라요. 학교에 한 번 확인해요.',
+      '변환 결과는 참고용이에요. 실제 반영 방법은 대학 모집요강을 봐요.',
+      '입력값이 틀리면 결과가 크게 달라지니 성적표와 꼭 맞춰봐요.'
+    ],
+    url: ''
+  },
+  {
+    id: 'system',
+    cat: 'major',
+    tag: '학과·전공',
+    color: 'sage',
+    title: '대입 제도 진학 준비',
+    summary: '대입 제도 변화와 교육청의 진학 자료를 확인하는 곳',
+    lead: '대입 제도가 어떻게 바뀌는지, 교육청에서 내는 진학 자료를 한곳에서 확인할 수 있어요.',
+    when: [
+      '입시 제도가 바뀐다는 말을 들었는데 정확히 모를 때',
+      '학년별로 준비해야 할 것이 궁금할 때',
+      '진학 설명회나 안내 자료를 찾을 때'
+    ],
+    steps: [
+      '사이트에 접속해서 대입 제도나 진학 자료 메뉴를 찾아요.',
+      '내 입학 연도와 학년에 해당하는 내용을 확인해요.',
+      '중요한 일정은 메모해둬요.'
+    ],
+    tips: [
+      '제도는 입학 연도에 따라 적용이 달라서, 내 학년 기준으로 읽어요.',
+      '소문이나 커뮤니티 글보다 공식 자료를 먼저 확인해요.'
+    ],
+    url: ''
+  },
+  {
+    id: 'finduniv',
+    cat: 'test',
+    tag: '성적',
+    color: 'sage',
+    title: '내 성적으로 대학 찾기',
+    summary: '내 성적과 대학별 입시 결과를 비교해 지원을 고려할 대학을 탐색하는 서비스',
+    lead: '내 성적을 입력하고 지난 입시 결과와 비교해서, 지원을 고려해볼 대학을 찾아보는 서비스예요.',
+    when: [
+      '내 성적으로 어떤 대학이 가능한지 궁금할 때',
+      '희망 대학 말고 다른 후보도 찾고 싶을 때'
+    ],
+    steps: [
+      '서비스를 열어요.',
+      '내 성적을 입력해요.',
+      '결과 목록에서 마음에 드는 대학을 골라 입시 정보를 확인해요.'
+    ],
+    tips: [
+      '결과는 지난 입시 기준의 참고용이에요.',
+      '안정·적정·도전으로 나눠서 후보를 골라두면 좋아요.',
+      '성적은 성적표를 보고 정확하게 입력해요.'
+    ],
+    url: ''
+  },
+  {
+    id: 'qnet',
+    cat: 'license',
+    tag: '자격증·시험',
+    color: 'sage',
+    title: '큐넷 국가자격시험 안내',
+    summary: '희망 진로와 관련된 국가기술,전문 자격증의 시험 일정과 응시 자격을 확인하는 곳',
+    lead: '자격증 시험 일정, 응시 자격, 시험 과목을 확인하는 공식 사이트예요.',
+    when: [
+      '희망 분야에 어떤 자격증이 있는지 궁금할 때',
+      '시험 일정과 접수 기간을 확인해야 할 때',
+      '응시 자격(나이, 학력 등)이 궁금할 때'
+    ],
+    steps: [
+      '공식 사이트에서 자격증 이름을 검색해요.',
+      '시험 일정, 응시 자격, 시험 과목을 확인해요.',
+      '접수 기간을 달력이나 알림에 적어둬요.'
+    ],
+    tips: [
+      '접수 기간이 짧아서 놓치기 쉬워요. 미리 알림을 설정해둬요.',
+      '자격증마다 응시 조건이 달라서, 내가 응시할 수 있는지 먼저 확인해요.'
+    ],
+    url: 'https://www.q-net.or.kr'
+  },
+  {
+    id: 'counsel',
+    cat: 'counsel',
+    tag: '진학상담',
+    color: 'gold',
+    title: '담임 선생님 상담 신청',
+    summary: '학과 선택, 자기소개서, 면접 준비 등 궁금한 점을 208 담임 선생님께 신청하기',
+    lead: '혼자 고민하기 어려운 진로·진학 질문을 208 담임 선생님께 신청하는 곳이에요.',
+    when: [
+      '학과나 대학 선택이 고민될 때',
+      '자기소개서나 면접 준비가 막막할 때',
+      '어디서부터 알아봐야 할지 모를 때'
+    ],
+    steps: [
+      '아래 신청 버튼을 눌러 신청서를 열어요.',
+      '이름, 상담 주제, 가능한 시간을 적어요.',
+      '선생님이 정해주신 시간에 상담해요.'
+    ],
+    tips: [
+      '궁금한 점을 2~3개 미리 적어오면 상담이 알차요.',
+      '진로 검사 결과나 성적표를 가져오면 더 구체적으로 상담할 수 있어요.'
+    ],
+    url: '',
+    btn: '상담 신청하러 가기',
+    soon: '신청 링크는 곧 추가될 예정이에요.'
+  }
+];
 
-      cards.forEach(card => {
-        if(filter === 'all' || card.dataset.cat === filter){
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
+/* =============== 아래는 사이트가 움직이는 코드예요 (건드리지 않아도 돼요) =============== */
+const ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg>';
+const BACK  = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>';
+
+const homeView = document.getElementById('homeView');
+const detailView = document.getElementById('detailView');
+const detailBody = document.getElementById('detailBody');
+const grid = document.getElementById('cardGrid');
+const buttons = document.querySelectorAll('.filter-btn');
+let currentFilter = 'all';
+
+function renderCards(){
+  grid.innerHTML = SITES
+    .filter(s => currentFilter === 'all' || s.cat === currentFilter)
+    .map(s => `
+    <div class="card" data-id="${s.id}">
+      <span class="tag ${s.color}">${s.tag}</span>
+      <h3>${s.title}</h3>
+      <p>${s.summary}</p>
+      <a href="#/${s.id}">자세히 보기 ${ARROW}</a>
+    </div>`).join('');
+}
+
+function renderDetail(s){
+  const list = arr => arr.map(x => `<li>${x}</li>`).join('');
+  const official = s.url
+    ? `<a class="official" href="${s.url}" target="_blank" rel="noopener">${s.btn || '공식 사이트 바로가기'} ${ARROW}</a>
+       <p class="note">새 탭에서 열려요</p>`
+    : `<div class="official off">${s.soon || '공식 사이트 링크는 곧 추가될 예정이에요.'}</div>`;
+  detailBody.innerHTML = `
+    <a class="back-btn" href="#/">${BACK} 목록으로</a>
+    <div class="detail-head">
+      <span class="tag ${s.color}">${s.tag}</span>
+      <h1>${s.title}</h1>
+      <p class="lead">${s.lead}</p>
+    </div>
+    <div class="section"><h2>이런 때 쓰면 좋아요</h2><ul>${list(s.when)}</ul></div>
+    <div class="section"><h2>이용 방법</h2><ul class="steps">${list(s.steps)}</ul></div>
+    <div class="section"><h2>진로진학부 꿀팁</h2><ul>${list(s.tips)}</ul></div>
+    ${official}`;
+}
+
+function route(){
+  const id = location.hash.replace('#/', '');
+  const site = SITES.find(s => s.id === id);
+  if(site){
+    renderDetail(site);
+    homeView.classList.add('hidden');
+    detailView.classList.remove('hidden');
+    document.title = site.title + ' | 진로 나침반';
+  } else {
+    detailView.classList.add('hidden');
+    homeView.classList.remove('hidden');
+    document.title = '진로 나침반 | 우리 반 진로진학 자료실';
+  }
+  window.scrollTo(0, 0);
+}
+
+buttons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    renderCards();
   });
+});
+
+grid.addEventListener('click', e => {
+  const card = e.target.closest('.card');
+  if(card) location.hash = '#/' + card.dataset.id;
+});
+
+window.addEventListener('hashchange', route);
+renderCards();
+route();
 </script>
 
 </body>
